@@ -24,31 +24,43 @@ public class Main {
             case 2:
                 System.out.println("Spiel beendet");
                 System.exit(0);
-
-
-
+            default:
+                System.out.println("Bitte gib ein gültiges Zeichen ein!");
         }
         return namen;
-
     }
+
     public static void main(String[] args) {
         boolean endOfGame = false;
+        char playerSymbol1 = '1';
+        char playerSombol2 = '2';
 
+        //Spielfeld erstellen
         char[][] spielfeld = new char[10][10];
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
-                spielfeld[i][j] = '|';
+                spielfeld[i][j] = 'o';
             }
         }
+        //Spiel initialisiern
         String[] namen = startGame();
         game game = new game(namen[0],namen[1]);
         Scanner scanner = new Scanner(System.in);
-        while(!endOfGame){
 
-            System.out.println("Hey " + namen[1] + ", in welche Spalte soll dein Chip? ");
+        while(!endOfGame){
+            //erster Spieler
+            System.out.println("Hey " + namen[0] + ", in welche Spalte soll dein Chip? ");
             int input = scanner.nextInt();
-            game.render(game.placeChip(spielfeld,input));
-            spielfeld = game.placeChip(spielfeld,input);
+            spielfeld = game.placeChip(spielfeld,input, playerSymbol1);
+            game.render(spielfeld);
+            //checkWin()
+            //zweiter Spieler
+            System.out.println("Hey " + namen[1] + ", in welche Spalte soll dein Chip? ");
+            int input1 = scanner.nextInt();
+            spielfeld = game.placeChip(spielfeld,input1,playerSombol2);
+            game.render(spielfeld);
+            //checkWin()
+
 
         }
 

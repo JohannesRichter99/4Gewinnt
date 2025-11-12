@@ -1,7 +1,5 @@
 
-
 public class game {
-
     String namePlayer1;
     String namePlayer2;
 
@@ -10,22 +8,30 @@ public class game {
         this.namePlayer2 = namePlayer2;
     }
 
-    public char[][] placeChip(char[][] spielfeld, int colum){
-            for(int j = 8; j >= 0; j--){
-                if(j == 8){
-                    spielfeld[j + 1][colum] = '=';
+    public char[][] placeChip(char[][] spielfeld, int colum, char playerSymbol) {
+
+        if(playerSymbol == '1'){
+            for (int i = spielfeld.length - 1; i >= 0; i--) {
+                if (spielfeld[i][colum] == 'o' || spielfeld[i][colum] == playerSymbol) {
+                    spielfeld[i][colum] = playerSymbol;
                     break;
                 }
-                if(spielfeld[j][colum] == '='){
-                    spielfeld[j + 1][colum] = '=';
-                }
-
             }
+        }
+        if(playerSymbol == '2'){
+            for (int i = spielfeld.length - 1; i >= 0; i--) {
+                if (spielfeld[i][colum] == 'o' || spielfeld[i][colum] == playerSymbol) {
+                    spielfeld[i][colum] = playerSymbol;
+                    break;
+                }
+            }
+        }
+
+
         return spielfeld;
     }
 
     public void render(char[][] spielfeld){
-
         for(int i = 0; i < spielfeld.length; i++){
             for(int j = 0; j < 10; j++){
                 if(j == 9){
